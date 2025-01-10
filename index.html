@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap Progress Tracker</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: beige;
+            color: black;
+        }
+
+        /* Fixed Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: brown;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 80px auto; /* Adjust for fixed header */
+            background: rgb(245, 239, 220);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.279);
+            padding: 20px;
+        }
+
+        .week {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 4px solid brown;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .week h3 {
+            color: brown;
+            margin: 0 0 10px 0;
+        }
+
+        .task {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .task input {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .task span {
+            font-size: 14px;
+        }
+
+        .task span.completed {
+            color: green;
+            text-decoration: line-through;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px 0;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header id="progress-header">
+        Progress: 0%
+    </header>
+    <div class="container">
+        <div id="roadmap"></div>
+    </div>
+    <div class="footer">
+        Built with ❤️ by <a href="#">Aman Raj</a>
+    </div>
+
+    <script>
+        // Roadmap Data
+        const roadmap = {
+        "Week 1": [
+            "Brush up on Java basics (OOP, Collections).",
+            "Learn Git fundamentals: version control, branching, merging.",
+            "Revise Python basics (focus on Django compatibility).",
+            "Start with HTML, CSS, and JavaScript basics.",
+            "Understand Django fundamentals: models, views, templates.",
+            "Begin DSA with Arrays and Strings (10 problems/day).",
+            "Start aptitude with percentages, time & work."
+        ],
+        "Week 2": [
+            "DSA: Focus on Linked Lists, Stacks, and Queues (15 problems/day).",
+            "Django: Build a CRUD application with user authentication.",
+            "Git: Work on small projects to solidify GitHub workflows.",
+            "JavaScript: Learn DOM manipulation and ES6 features.",
+            "React Basics: Learn JSX, components, state, and props.",
+            "Start AWS basics and create your first S3 bucket.",
+            "Practice aptitude: speed & distance, logical reasoning."
+        ],
+        "Week 3": [
+            "DSA: Solve Tree problems (15 problems/day).",
+            "Django: Build the stock trend prediction app with REST APIs.",
+            "Machine Learning: Learn Regression and implement Linear Regression.",
+            "MERN: Start backend with Node.js and Express.",
+            "React: Build basic YouTube clone frontend.",
+            "GitHub: Host Django project with proper documentation.",
+            "Data Pipelining: Install Airflow, create a sample DAG."
+        ],
+        "Week 4": [
+            "DSA: Focus on Graphs and practice 20 problems/day.",
+            "Django: Finalize and deploy the stock prediction app (Heroku/AWS).",
+            "Machine Learning: Learn Classification and Decision Trees.",
+            "MERN: Integrate backend with MongoDB for YouTube clone.",
+            "React: Add routing and state management.",
+            "Aptitude: Focus on critical reasoning and verbal ability.",
+            "Airflow: Build a DAG to automate stock data ingestion."
+        ],
+        "Week 5": [
+            "DSA: Start with Dynamic Programming and practice 20 problems/day.",
+            "Machine Learning: Implement Random Forest and Clustering.",
+            "Django: Optimize stock app UI and backend.",
+            "MERN: Start Twitter clone with authentication (JWT).",
+            "Data Pipelining: Use PySpark to preprocess stock data.",
+            "AWS: Set up Snowflake integration for data storage.",
+            "Aptitude: Solve full-length mock tests."
+        ],
+        "Week 6": [
+            "DSA: Solve advanced DP and Backtracking problems.",
+            "MERN: Complete Twitter clone with advanced features (real-time updates).",
+            "Machine Learning: Focus on model evaluation and feature engineering.",
+            "Data Pipelining: Automate pipeline using Airflow and Snowflake.",
+            "GitHub: Update projects and create a professional portfolio.",
+            "Aptitude: Practice puzzles and advanced reasoning."
+        ],
+        "Week 7": [
+            "DSA: Revise all topics, solve mixed problems (20/day).",
+            "MERN: Add search and analytics features to projects.",
+            "Django: Document and polish the stock app.",
+            "Machine Learning: Fine-tune models for stock trend prediction.",
+            "Aptitude: Focus on weak areas identified from mock tests.",
+            "Mock Interviews: Start technical interview preparation."
+        ],
+        "Week 8": [
+            "DSA: Mock tests with competitive programming platforms.",
+            "MERN/Django: Final deployment and testing of all projects.",
+            "Portfolio: Finalize and present projects on GitHub/website.",
+            "Aptitude: Full-length tests and revision.",
+            "Interview Prep: Technical and HR mock interviews.",
+            "Focus on applying for jobs with updated resume and portfolio."
+        ]
+    };
+
+        const roadmapContainer = document.getElementById("roadmap");
+        const progressHeader = document.getElementById("progress-header");
+        let totalTasks = 0;
+        let completedTasks = 0;
+
+        // Load saved progress
+        let savedProgress = JSON.parse(localStorage.getItem("progress")) || {};
+
+        // Update progress
+        function updateProgress() {
+            const progress = Math.round((completedTasks / totalTasks) * 100);
+            progressHeader.textContent = `Progress: ${progress}%`;
+            localStorage.setItem("progress", JSON.stringify(savedProgress));
+        }
+
+        // Render roadmap
+        for (const [week, tasks] of Object.entries(roadmap)) {
+            const weekDiv = document.createElement("div");
+            weekDiv.className = "week";
+
+            const weekTitle = document.createElement("h3");
+            weekTitle.textContent = week;
+            weekDiv.appendChild(weekTitle);
+
+            tasks.forEach((task, index) => {
+                totalTasks++;
+                const taskDiv = document.createElement("div");
+                taskDiv.className = "task";
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+
+                const taskId = `${week}-${index}`;
+                checkbox.checked = savedProgress[taskId] || false;
+
+                if (checkbox.checked) {
+                    completedTasks++;
+                }
+
+                checkbox.addEventListener("change", () => {
+                    if (checkbox.checked) {
+                        savedProgress[taskId] = true;
+                        completedTasks++;
+                        taskText.classList.add("completed");
+                    } else {
+                        delete savedProgress[taskId];
+                        completedTasks--;
+                        taskText.classList.remove("completed");
+                    }
+                    updateProgress();
+                });
+
+                const taskText = document.createElement("span");
+                taskText.textContent = task;
+                if (checkbox.checked) {
+                    taskText.classList.add("completed");
+                }
+
+                taskDiv.appendChild(checkbox);
+                taskDiv.appendChild(taskText);
+                weekDiv.appendChild(taskDiv);
+            });
+
+            roadmapContainer.appendChild(weekDiv);
+        }
+
+        updateProgress();
+    </script>
+</body>
+</html>
