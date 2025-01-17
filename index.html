@@ -10,8 +10,8 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: beige;
-            color: black;
+            background-color: #121212;
+            color: #ffffff;
         }
 
         /* Fixed Header */
@@ -20,41 +20,42 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: brown;
-            color: white;
+            background-color: #1e1e1e;
+            color: #ffffff;
             padding: 15px 0;
             text-align: center;
             font-size: 20px;
             font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             z-index: 1000;
         }
 
         .container {
-            max-width: 800px;
-            margin: 80px auto; /* Adjust for fixed header */
-            background: rgb(245, 239, 220);
+            max-width: 50%;
+            margin: 100px auto; /* Adjust for fixed header */
+            background: #1e1e1e;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.279);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             padding: 20px;
         }
 
-        .week {
+        .category {
             margin-bottom: 20px;
             padding: 15px;
-            border-left: 4px solid brown;
-            background: white;
+            border-left: 4px solid #bb86fc;
+            background: #2c2c2c;
             border-radius: 4px;
         }
 
-        .week h3 {
-            color: brown;
+        .category h3 {
+            color: #bb86fc;
             margin: 0 0 10px 0;
         }
 
         .task {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 10px;
         }
 
@@ -68,20 +69,44 @@
         }
 
         .task span.completed {
-            color: green;
+            color: #03dac5;
             text-decoration: line-through;
+        }
+
+        .project-task {
+            display: flex;
+            gap: 10px;
+        }
+
+        .project-task label {
+            color: #ffffff;
         }
 
         .footer {
             text-align: center;
             padding: 10px 0;
-            color: #777;
+            color: #bbbbbb;
             font-size: 14px;
         }
 
         .footer a {
-            color: #007bff;
+            color: #bb86fc;
             text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            header {
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .task span {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -99,76 +124,33 @@
     <script>
         // Roadmap Data
         const roadmap = {
-        "Week 1": [
-            "Brush up on Java basics (OOP, Collections).",
-            "Learn Git fundamentals: version control, branching, merging.",
-            "Revise Python basics (focus on Django compatibility).",
-            "Start with HTML, CSS, and JavaScript basics.",
-            "Understand Django fundamentals: models, views, templates.",
-            "Begin DSA with Arrays and Strings (10 problems/day).",
-            "Start aptitude with percentages, time & work."
-        ],
-        "Week 2": [
-            "DSA: Focus on Linked Lists, Stacks, and Queues (15 problems/day).",
-            "Django: Build a CRUD application with user authentication.",
-            "Git: Work on small projects to solidify GitHub workflows.",
-            "JavaScript: Learn DOM manipulation and ES6 features.",
-            "React Basics: Learn JSX, components, state, and props.",
-            "Start AWS basics and create your first S3 bucket.",
-            "Practice aptitude: speed & distance, logical reasoning."
-        ],
-        "Week 3": [
-            "DSA: Solve Tree problems (15 problems/day).",
-            "Django: Build the stock trend prediction app with REST APIs.",
-            "Machine Learning: Learn Regression and implement Linear Regression.",
-            "MERN: Start backend with Node.js and Express.",
-            "React: Build basic YouTube clone frontend.",
-            "GitHub: Host Django project with proper documentation.",
-            "Data Pipelining: Install Airflow, create a sample DAG."
-        ],
-        "Week 4": [
-            "DSA: Focus on Graphs and practice 20 problems/day.",
-            "Django: Finalize and deploy the stock prediction app (Heroku/AWS).",
-            "Machine Learning: Learn Classification and Decision Trees.",
-            "MERN: Integrate backend with MongoDB for YouTube clone.",
-            "React: Add routing and state management.",
-            "Aptitude: Focus on critical reasoning and verbal ability.",
-            "Airflow: Build a DAG to automate stock data ingestion."
-        ],
-        "Week 5": [
-            "DSA: Start with Dynamic Programming and practice 20 problems/day.",
-            "Machine Learning: Implement Random Forest and Clustering.",
-            "Django: Optimize stock app UI and backend.",
-            "MERN: Start Twitter clone with authentication (JWT).",
-            "Data Pipelining: Use PySpark to preprocess stock data.",
-            "AWS: Set up Snowflake integration for data storage.",
-            "Aptitude: Solve full-length mock tests."
-        ],
-        "Week 6": [
-            "DSA: Solve advanced DP and Backtracking problems.",
-            "MERN: Complete Twitter clone with advanced features (real-time updates).",
-            "Machine Learning: Focus on model evaluation and feature engineering.",
-            "Data Pipelining: Automate pipeline using Airflow and Snowflake.",
-            "GitHub: Update projects and create a professional portfolio.",
-            "Aptitude: Practice puzzles and advanced reasoning."
-        ],
-        "Week 7": [
-            "DSA: Revise all topics, solve mixed problems (20/day).",
-            "MERN: Add search and analytics features to projects.",
-            "Django: Document and polish the stock app.",
-            "Machine Learning: Fine-tune models for stock trend prediction.",
-            "Aptitude: Focus on weak areas identified from mock tests.",
-            "Mock Interviews: Start technical interview preparation."
-        ],
-        "Week 8": [
-            "DSA: Mock tests with competitive programming platforms.",
-            "MERN/Django: Final deployment and testing of all projects.",
-            "Portfolio: Finalize and present projects on GitHub/website.",
-            "Aptitude: Full-length tests and revision.",
-            "Interview Prep: Technical and HR mock interviews.",
-            "Focus on applying for jobs with updated resume and portfolio."
-        ]
-    };
+            "Skills": [
+                "DSA",
+                "JavaScript",
+                "JavaScript Backend",
+                "Express.js",
+                "MongoDB",
+                "PostgreSQL",
+                "React.js",
+                "Django",
+                "API",
+                "CI/CD",
+                "Machine Learning",
+                "Excel",
+                "PowerBI",
+                "Airflow",
+                "Snowflake",
+                "Apache Spark",
+                "Data Pipelining",
+                "Aptitude"
+            ],
+            "Projects": [
+                { name: "StockInsights using Data Pipelining", levels: ["built", "deployed", "posted"] },
+                { name: "Plant Disease Diagnosis using Django", levels: ["built", "deployed", "posted"] },
+                { name: "E-commerce using React", levels: ["built", "deployed", "posted"] },
+                { name: "Clone of YouTube + Twitter (backend)", levels: ["built", "deployed", "posted"] }
+            ]
+        };
 
         const roadmapContainer = document.getElementById("roadmap");
         const progressHeader = document.getElementById("progress-header");
@@ -186,54 +168,98 @@
         }
 
         // Render roadmap
-        for (const [week, tasks] of Object.entries(roadmap)) {
-            const weekDiv = document.createElement("div");
-            weekDiv.className = "week";
+        for (const [category, tasks] of Object.entries(roadmap)) {
+            const categoryDiv = document.createElement("div");
+            categoryDiv.className = "category";
 
-            const weekTitle = document.createElement("h3");
-            weekTitle.textContent = week;
-            weekDiv.appendChild(weekTitle);
+            const categoryTitle = document.createElement("h3");
+            categoryTitle.textContent = category;
+            categoryDiv.appendChild(categoryTitle);
 
-            tasks.forEach((task, index) => {
-                totalTasks++;
-                const taskDiv = document.createElement("div");
-                taskDiv.className = "task";
+            if (category === "Projects") {
+                tasks.forEach((task, index) => {
+                    totalTasks += task.levels.length;
+                    const taskDiv = document.createElement("div");
+                    taskDiv.className = "task";
 
-                const checkbox = document.createElement("input");
-                checkbox.type = "checkbox";
+                    const taskName = document.createElement("span");
+                    taskName.textContent = task.name;
+                    taskDiv.appendChild(taskName);
 
-                const taskId = `${week}-${index}`;
-                checkbox.checked = savedProgress[taskId] || false;
+                    const levelsDiv = document.createElement("div");
+                    levelsDiv.className = "project-task";
 
-                if (checkbox.checked) {
-                    completedTasks++;
-                }
+                    task.levels.forEach((level, levelIndex) => {
+                        const checkbox = document.createElement("input");
+                        checkbox.type = "checkbox";
 
-                checkbox.addEventListener("change", () => {
-                    if (checkbox.checked) {
-                        savedProgress[taskId] = true;
-                        completedTasks++;
-                        taskText.classList.add("completed");
-                    } else {
-                        delete savedProgress[taskId];
-                        completedTasks--;
-                        taskText.classList.remove("completed");
-                    }
-                    updateProgress();
+                        const taskId = `${category}-${index}-${levelIndex}`;
+                        checkbox.checked = savedProgress[taskId] || false;
+
+                        if (checkbox.checked) {
+                            completedTasks++;
+                        }
+
+                        checkbox.addEventListener("change", () => {
+                            if (checkbox.checked) {
+                                savedProgress[taskId] = true;
+                                completedTasks++;
+                            } else {
+                                delete savedProgress[taskId];
+                                completedTasks--;
+                            }
+                            updateProgress();
+                        });
+
+                        const label = document.createElement("label");
+                        label.textContent = level;
+                        levelsDiv.appendChild(checkbox);
+                        levelsDiv.appendChild(label);
+                    });
+
+                    taskDiv.appendChild(levelsDiv);
+                    categoryDiv.appendChild(taskDiv);
                 });
+            } else {
+                tasks.forEach((task, index) => {
+                    totalTasks++;
+                    const taskDiv = document.createElement("div");
+                    taskDiv.className = "task";
 
-                const taskText = document.createElement("span");
-                taskText.textContent = task;
-                if (checkbox.checked) {
-                    taskText.classList.add("completed");
-                }
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
 
-                taskDiv.appendChild(checkbox);
-                taskDiv.appendChild(taskText);
-                weekDiv.appendChild(taskDiv);
-            });
+                    const taskId = `${category}-${index}`;
+                    checkbox.checked = savedProgress[taskId] || false;
 
-            roadmapContainer.appendChild(weekDiv);
+                    if (checkbox.checked) {
+                        completedTasks++;
+                    }
+
+                    checkbox.addEventListener("change", () => {
+                        if (checkbox.checked) {
+                            savedProgress[taskId] = true;
+                            completedTasks++;
+                        } else {
+                            delete savedProgress[taskId];
+                            completedTasks--;
+                        }
+                        updateProgress();
+                    });
+
+                    const taskText = document.createElement("span");
+                    taskText.textContent = task;
+                    if (checkbox.checked) {
+                        taskText.classList.add("completed");
+                    }
+
+                    taskDiv.appendChild(checkbox);
+                    taskDiv.appendChild(taskText);
+                    categoryDiv.appendChild(taskDiv);
+                });
+            }
+
+            roadmapContainer.appendChild(categoryDiv);
         }
 
         updateProgress();
