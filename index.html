@@ -31,7 +31,7 @@
         }
 
         .container {
-            max-width: 50%;
+            max-width: 90%;
             margin: 100px auto; /* Adjust for fixed header */
             background: #1e1e1e;
             border-radius: 8px;
@@ -75,7 +75,8 @@
 
         .project-task {
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            gap: 5px; /* Space between features */
         }
 
         .project-task label {
@@ -114,14 +115,26 @@
     <header id="progress-header">
         Progress: 0%
     </header>
-    <div class="container">
+    <div class="container" id="content" style="display: none;">
         <div id="roadmap"></div>
     </div>
-    <div class="footer">
+    <div class="footer" id="footer" style="display: none;">
         Built with ❤️ by <a href="#">Aman Raj</a>
     </div>
 
     <script>
+        // Password Protection
+        const correctPassword = "roadmap123"; // Change this to your desired password
+        const userPassword = prompt("Enter the password to access the page:");
+
+        if (userPassword === correctPassword) {
+            document.getElementById("content").style.display = "block";
+            document.getElementById("footer").style.display = "block";
+        } else {
+            alert("Incorrect password! You will be redirected.");
+            window.location.href = "https://www.google.com"; // Redirect to another page
+        }
+
         // Roadmap Data
         const roadmap = {
             "Skills": [
